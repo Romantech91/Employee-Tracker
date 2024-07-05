@@ -5,33 +5,31 @@ const addEmployeesBtn = document.querySelector("#add-employees-btn");
 const collectEmployees = function () {
   let askAgain = true;
   let employeeRoster = [];
-  let firstName = prompt("What is the emoloyee's first name?");
-  let lastName = prompt("What is the employees last name?");
-  let salary = prompt("What is the employees salary?");
-  let employee = {
-    firstName,
-    lastName,
-    salary,
-  };
-  console.log(employee);
-  employeeRoster.push(employee);
-  console.log(employeeRoster);
 
+  while (askAgain) {
+    let firstName = prompt("What is the emoloyee's first name?");
+    let lastName = prompt("What is the employees last name?");
+    let salary = prompt("What is the employees salary?");
+    let continueForm = confirm("do you want to add another emoloyee?");
+
+    if (continueForm) {
+      askAgain = true;
+    } else {
+      askAgain = false;
+    }
+
+    let employee = {
+      firstName,
+      lastName,
+      salary: parseInt(salary),
+    };
+    console.log(employee);
+    employeeRoster.push(employee);
+    console.log(employeeRoster);
+  }
   return employeeRoster;
 };
 
-// while (askAgain) {
-//   let firstName = prompt("What is the emoloyee's first name?");
-//   let lastName = prompt("What is the employees last name?");
-//   let salary = prompt("What is the employees salary?");
-//   let continueForm = confirm("do you want to add another emoloyee?");
-
-//   if (continueForm) {
-//     askAgain = true;
-//   } else {
-//     askAgain = false;
-//   }
-// }
 // Display the average salary
 function displayAverageSalary(employeesArray) {
   let sum = 0;
@@ -43,7 +41,7 @@ function displayAverageSalary(employeesArray) {
     sum += employeesArray[i].salary;
   }
   let avg = sum / employeesArray.length;
-  console.log("Average Salary:", avg);
+  console.log(`Average Salary between our ${employeesArray.length} is ${avg}`);
   return avg;
 }
 // TODO: Calculate and display the average salary
@@ -58,8 +56,8 @@ const getRandomEmployee = function (employeesArray) {
   const randomEmployee = employeesArray[randomIndex];
   console.log(
     "Congradulations to",
-    firstName,
-    lastName,
+    randomEmployee.firstName,
+    randomEmployee.lastName,
     "our random drawing winner!"
   );
   return randomEmployee;
